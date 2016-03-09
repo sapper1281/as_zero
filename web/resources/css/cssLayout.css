@@ -1,0 +1,72 @@
+
+#top {
+    position: relative;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-collapse: collapse;
+    border: none;
+    background-color: aliceblue;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+#top tr{
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-collapse: collapse;
+    border: none;
+}
+
+#bottom {
+    position: relative;
+    padding: 5px;
+    margin: 0px 0px 0px 0px;
+}
+
+#left {
+    float: left;
+    padding: 5px;
+    width: 240px; 
+    min-height: 75%;
+    background-color: #DDDCB4;
+    background-image: url(../img/left_grad3.png);
+    background-repeat: repeat-x;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    padding: 5px;
+}
+
+.left_content {
+    padding: 5px;
+    width: 80%;
+}
+
+.right_content {
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+

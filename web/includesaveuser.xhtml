@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <div class="normalMainForm1">
+            <p:panelGrid columns="1" styleClass="invisibleBorder1"  style="text-align: left">
+                <p:tabView id="tabView" dynamic="true" activeIndex="#{saveUserPageBean1.tab}">  
+                   
+
+                    <p:tab id="playerTab1_1" title="Учетные данные"  >  
+                        <h:form id="form">
+                            <p:panel>  
+                                <f:facet  name="footer">
+                                    <p:panelGrid columns="3"  >
+                                        <p:commandLink value="Сохранить" update=":form2" actionListener="#{saveUserPageBean1.saveItem()}">
+                                            
+                                        </p:commandLink>
+                                        <p:commandLink rendered="${!saveUserPageBean1.item.deleted}" value="Удалить" update=":form2" actionListener="#{saveUserPageBean1.deleteItem()}">
+                                        </p:commandLink> 
+                                        <p:commandLink rendered="${saveUserPageBean1.item.deleted}" value="Восстановить" update=":form2" actionListener="#{saveUserPageBean1.repareItem()}">
+                                        </p:commandLink> 
+                                        <p:commandLink  value="Назад" update=":form2" actionListener="${saveUserPageBean1.toDepartment()}"/>
+                                    </p:panelGrid>
+
+                                </f:facet>
+                                <h:inputHidden value="#{saveUserPageBean1.oldLogin}"/>
+                                <h3>Ввод информации о пользователе</h3>
+                                <p:panelGrid id="panel" columns="2">
+
+                                    <h:outputLabel for="login" value="Логин" />
+                                    <h:inputText value="${saveUserPageBean1.item.login}" id="login" />
+
+                                    <h:outputLabel for="pas" value="Пароль" />
+                                    <h:inputText id="pas" value="#{saveUserPageBean1.item.password}" /> 
+
+                                    <h:outputLabel for="fam" value="Фамилия" />
+                                    <h:inputText id="fam" value="#{saveUserPageBean1.item.surname}" /> 
+
+                                    <h:outputLabel for="nam" value="Имя" />
+                                    <h:inputText id="nam" value="#{saveUserPageBean1.item.name}" /> 
+
+                                    <h:outputLabel for="pat" value="Отчество" />
+                                    <h:inputText id="pat" value="#{saveUserPageBean1.item.patronomicname}" /> 
+
+                                    <h:outputLabel for="mail" value="Телефон" />
+                                    <h:inputText id="mail" value="#{saveUserPageBean1.item.phoneNumber}" /> 
+
+                                    <h:outputLabel value="Организация" />
+                                    <h:outputLabel id="org" value="#{saveUserPageBean1.item.department}" /> 
+                                    
+                                   
+
+                                    <p:selectOneMenu value="#{saveUserPageBean1.item.userType}"  converter="typeConverter" style="width: 180px">
+                                        <f:selectItems value="#{saveUserPageBean1.types}"
+                                                       var="man" 
+                                                       itemLabel="#{man.name}"
+                                                       itemValue="#{man}"/>
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+
+                            </p:panel>
+                        </h:form>
+                    </p:tab>
+
+                    <p:tab id="playerTab2_1" title="Доступ к формам">  
+                            <p:panel>  
+                                <f:facet  name="footer">
+                                    <p:panelGrid columns="2"  >
+                                        <p:commandLink update=":form2"  value="Сохранить" disabled="#{saveUserPageBean1.item.id==0}" actionListener="#{saveRightsPageBean.saveRights()}"/>
+
+                                        <p:commandLink  value="Назад" update=":form2" actionListener="${saveUserPageBean1.toDepartment()}"/>
+                                    </p:panelGrid>
+
+                                </f:facet>
+
+                                <p:outputLabel value="Права для #{saveRightsPageBean.userBean.item.FIO} ID= #{saveRightsPageBean.userBean.item.id}"/>
+
+                                <p:dataTable id="dataTable" var="item" value="#{saveRightsPageBean.list}" widgetVar="carsTable"   
+                                             emptyMessage="Формы не найдены" editable="true">  
+
+                                    <p:column id="ad" headerText="Форма" >  
+                                        <h:outputText value="#{item.form.fullNameForm}" />  
+                                    </p:column>  
+
+                                    <p:column id="visible" headerText="Доступ">  
+                                        <div class="centralizationDiv">
+                                            <p:selectBooleanCheckbox value="#{item.enabled}"/>  
+                                        </div>
+                                    </p:column> 
+                                    
+                                </p:dataTable>
+                            </p:panel>
+                    </p:tab>
+                </p:tabView>
+            </p:panelGrid>
+        </div>
+    </h:body>
+</html>
+

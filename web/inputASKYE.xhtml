@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        
+  <p:dialog modal="true" widgetVar="statusDialog1" header="Данные добавлены"   
+         >  
+     <p:outputLabel value="Данные добавлены"/>
+    
+</p:dialog>  
+              
+<p:dialog modal="true" widgetVar="statusDialog" header="Идет обработка"   
+        draggable="false" closable="false" >  
+    <p:graphicImage library="img" name="ajaxloadingbar.gif"  />  
+    
+</p:dialog>     
+       
+       
+        <h:form enctype="multipart/form-data">
+            
+     <p:panel id="panel" header="Добавить данные АСКУЭ">         
+     <p:dataTable id="idcar" var="car" value="#{inputASKYEPageBean.errList}">  
+        <f:facet name="header">  
+            Не обработанные обьекты  
+        </f:facet> 
+        <p:column headerText="Обьект">  
+            <h:outputText value="#{car.inf1}" />  
+        </p:column>  
+  
+        <p:column headerText="Причина">  
+            <h:outputText value="#{car.inf2}" />  
+        </p:column>  
+         <p:column headerText="Строка">  
+            <h:outputText value="#{car.inf3}" />  
+        </p:column>
+     </p:dataTable>  
+            
+            
+            
+            
+            <p:fileUpload fileUploadListener="#{inputASKYEPageBean.handleFileUpload}"   
+                          mode="advanced"  
+                          update="idcar,panel"
+                          process="idcar,panel"
+                          uploadLabel="Обработать"
+                          cancelLabel="Отменить"
+                          label="Добавить" invalidFileMessage="Файл не соответствует формату Excel 2003"
+                          onstart="statusDialog.show()"
+                          oncomplete="statusDialog.hide();statusDialog1.show()"
+                          allowTypes="/(\.|\/)(xls)$/"/>  
+    <h:button value="Назад" outcome="mainpage" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button1"/>
+</p:panel>  
+      
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

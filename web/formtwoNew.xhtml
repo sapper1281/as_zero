@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:panelGrid columns="1" styleClass="invisibleBorder">
+
+
+
+                <h:panelGrid id="panel3" columns="2" class="withoutBorder" rowClasses="withoutBorder" columnClasses="withoutBorder, withoutBorder"> 
+                    <p:outputLabel value="Выберите месяц"/> 
+                    <p:calendar rendered="#{!formTwoPageBean1.tr}" value="#{formTwoPageBean1.repForm2.dt_begin}"
+                                mindate="#{formTwoPageBean1.dt_min_cal_st}" maxdate="#{formTwoPageBean1.dt_max_cal_st}" id="popupButton3Cal" showOn="button" locale="ru" navigator="true" pattern="dd.MM.yyyy">
+
+
+
+
+
+                    </p:calendar>
+                    <p:dialog header="Selected Dates" widgetVar="dialog" 
+                              showEffect="fade" hideEffect="fade">
+                        <h:outputText value="#{formTwoPageBean1.repForm2.dt_begin}" id="popupButton3Date">
+                            <f:convertDateTime pattern="dd.MM.yyyy"/>
+                        </h:outputText>
+                    </p:dialog>
+                </h:panelGrid>       
+
+
+
+
+
+                <p:outputLabel id="dt" value="#{formtwo.form} за #{formTwoPageBean1.dt_min_cal_st_NEW}" styleClass="formNumber"/>
+                <p:outputLabel value="#{formTwoPageBean1.repForm2.usr.department.nameNp}"  styleClass="centerHeader"/>
+
+
+                <p:growl id="messages" showDetail="true"/>
+
+                <p:dataTable var="car" value="#{formTwoPageBean1.repForm2.detailsForm2}" editMode="cell" id="report" styleClass="cont" editable="true" emptyMessage="Нет мероприятий">
+
+
+                    <p:columnGroup  type="header">  
+                        <p:row>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell1}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell2}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell3}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell4}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell5}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell6}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell7}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell8}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell9}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell10}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formtwo.cell11}"/>  
+                        </p:row> 
+                    </p:columnGroup> 
+
+
+                    <p:column>
+
+
+                        <h:link outcome="formoneNew" value="#{car.departmentName}">
+                            <f:param name="id" value="#{car.repId}"/>
+                        </h:link>
+
+
+
+                    </p:column>
+
+
+                    <p:column>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{car.fioChief}" />
+                            </f:facet>
+                            <f:facet name="input" >
+                                <p:inputText value="#{car.fioChief}" />
+                            </f:facet>
+                        </p:cellEditor></p:column>
+
+                    <p:column>
+                        <p:cellEditor >
+                            <f:facet name="output">
+                                <h:outputText value="#{car.phoneChief}"  />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{car.phoneChief}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{car.rorsChief}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{car.rorsChief}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+
+
+                    <p:column  style="background-color: #{car.inputActivityPlan}">     
+
+                    </p:column>
+
+
+
+
+                    <p:column style="background-color: #{car.inputActivityFact}">    
+                        <f:facet name="footer">  
+                            ИТОГО
+                        </f:facet>         
+                    </p:column >
+
+                    <p:column>
+
+                        <p:outputLabel value="#{car.form2Coll7}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                        <f:facet name="footer">  
+                            <p:outputLabel value="#{formTwoPageBean1.coll7}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+
+                        </f:facet>  
+                    </p:column>
+                    <p:column>
+
+                        <p:outputLabel value="#{car.form2Coll8}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                        <f:facet name="footer"> 
+                            <p:outputLabel value="#{formTwoPageBean1.coll8}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>  
+                    </p:column>
+                    <p:column>
+
+                        <p:outputLabel value="#{car.form2Coll9}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                        <f:facet name="footer">  
+                            <p:outputLabel value="#{formTwoPageBean1.coll9}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>  
+                    </p:column>
+                    <p:column>
+
+                        <p:outputLabel value="#{car.form2Coll10}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                        <f:facet name="footer">  
+                            <p:outputLabel value="#{formTwoPageBean1.coll10}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>  
+
+                    </p:column>
+
+
+
+                    <p:column> 
+
+                        <p:outputLabel value="#{car.askye}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                        <h:outputText value="" />
+                        <f:facet name="footer">  
+                            <p:outputLabel value="#{formTwoPageBean1.askye}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>  
+                    </p:column>
+
+
+
+
+
+                </p:dataTable>
+                <h:commandLink>  
+                    <p:graphicImage library="img" name="excel.png"  />                   
+                    <p:dataExporter type="xls" target="report" fileName="cars" postProcessor="#{formTwoPageBean1.Print}" />  
+                </h:commandLink> 
+                <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+                    <p:outputLabel value="#{formtwo.dt_create}"/>
+                    <p:outputLabel value="#{formTwoPageBean1.repForm2.dt_createString}"/>
+                    <p:outputLabel value="#{formtwo.user}"/>
+                    <p:outputLabel value="#{formTwoPageBean1.repForm2.usr.FIO}"/>
+                    <p:outputLabel value="#{formtwo.phone}"/>
+                    <p:outputLabel value="#{formTwoPageBean1.repForm2.usr.phoneNumber}"/>
+                    <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+                        <p:commandButton rendered="#{formTwoPageBean1.repForm2.usr.department.id==formTwoPageBean1.session.user.departmentID}"  value="Сохранить" action="#{formTwoPageBean1.save}" />
+
+                        <h:button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button" value="Назад" outcome="mainpage" />
+
+
+                    </p:panelGrid>
+                </p:panelGrid>
+            </p:panelGrid>
+
+
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="content">
+
+        <p:dataTable value="#{measuresPageBean.list}" var="item" editable="true">
+            
+            <p:ajax event="rowEdit" listener="#{measuresPageBean.onEdit}"  />  
+        <p:ajax event="rowEditCancel" listener="#{measuresPageBean.onCancel}"  />  
+            
+            <p:column id="id">  
+                <f:facet name="header">  
+                    <p:outputLabel value="#{msgs.id}"/>  
+                </f:facet>
+                <p:outputLabel value="#{item.id}" />
+            </p:column> 
+
+            <p:column id="value">  
+                <f:facet name="header">  
+                    <p:outputLabel value="#{msgs.value}"/>  
+                </f:facet>
+                <p:outputLabel value="#{item.value}" escape="false"/>
+            </p:column> 
+
+            <p:column id="flag">  
+                <f:facet name="header">  
+                    <p:outputLabel value="#{msgs.del_fl}"/>  
+                </f:facet>
+                <p:selectBooleanCheckbox value="#{item.deleted}"/>
+            </p:column> 
+
+            <p:column>  
+                <p:rowEditor />  
+            </p:column>  
+        </p:dataTable>
+    </ui:define>
+
+</ui:composition>

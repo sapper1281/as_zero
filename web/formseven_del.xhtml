@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:panelGrid columns="1" styleClass="invisibleBorder">
+
+
+
+
+
+
+                <p:outputLabel id="dt"   value="#{formseven.form}  за #{formSevenPageBean.month}" styleClass="formNumber"/>
+
+
+
+
+
+
+                <p:dataTable id="depTable" var="formSeven"  value="#{formSevenPageBean.formSevenList}" >  
+                    <p:columnGroup  type="header">  
+
+                        <p:row>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven1}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven2}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven3}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven4}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven5}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven6}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven7}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven8}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven9}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven10}"/> 
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven11}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven12}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven13}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formseven.seven14}"/>  
+                        </p:row> 
+                    </p:columnGroup>  
+
+
+                    <p:column >  
+                        #{formSevenPageBean.formSevenList.indexOf(formSeven)+1}
+                    </p:column>  
+
+                    <p:column >  
+                        <p:outputLabel value="#{formSeven.col1}" />
+                    </p:column><p:column >  
+                        <p:outputLabel value="#{formSeven.col2}" />
+                    </p:column><p:column >  
+                        <p:outputLabel value="#{formSeven.col3}" />
+                    </p:column><p:column >  
+                        <p:outputLabel value="#{formSeven.activity}" />
+                    </p:column><p:column >  
+                        <p:outputLabel value="#{formSeven.addres}" />
+                    </p:column><p:column >  
+                        <p:outputLabel value="#{formSeven.responsible}" />
+                    </p:column><p:column >  
+                        <p:outputLabel value="#{formSeven.powerSource}" />
+                    </p:column><p:column >  
+                        <p:outputLabel value="#{formSeven.addressOfObject}" />
+                    </p:column> <p:column >  
+                        <p:outputLabel value="#{formSeven.type}" />
+                    </p:column> <p:column >  
+                        <p:outputLabel value="#{formSeven.num}" />
+                    </p:column> <p:column >  
+                        <p:outputLabel value="#{formSeven.askueYesOrNot}" />
+                    </p:column> <p:column >  
+
+                        <p:outputLabel value="#{formSeven.plan_col}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>  <p:column >  
+                        <p:outputLabel value="#{formSeven.fact_col}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column> <p:column >  
+                        <p:outputLabel value="#{formSeven.fact_plan_col}"/>
+                    </p:column>  
+
+
+
+
+
+
+
+
+
+                </p:dataTable>  
+
+                <h:commandLink>  
+                    <p:graphicImage library="img" name="excel.png"  />                   
+                    <p:dataExporter type="xls" target="depTable" fileName="form7" postProcessor="#{formSevenPageBean.Print}" />  
+                </h:commandLink>     
+
+
+
+                <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+
+                    <p:commandButton value="Назад" action="mainpage" />
+
+                </p:panelGrid>
+            </p:panelGrid>
+
+        </h:form>  
+    </ui:define>
+</ui:composition>
+

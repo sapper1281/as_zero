@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    
+      <application> 
+        <resource-bundle> 
+            <base-name>news.news</base-name> 
+            <var>msgs</var> 
+        </resource-bundle> 
+        <resource-bundle> 
+            <base-name>forms.text.formseven</base-name> 
+            <var>formseven</var> 
+        </resource-bundle> 
+        <resource-bundle> 
+            <base-name>forms.text.formone</base-name> 
+            <var>formone</var> 
+        </resource-bundle> 
+        <resource-bundle> 
+            <base-name>forms.text.formtwo</base-name> 
+            <var>formtwo</var> 
+        </resource-bundle> 
+        <resource-bundle> 
+            <base-name>forms.text.formtree</base-name> 
+            <var>formtree</var> 
+        </resource-bundle> 
+        
+          <resource-bundle> 
+            <base-name>forms.text.formfour</base-name> 
+            <var>formfour</var> 
+        </resource-bundle> 
+        
+        <resource-bundle> 
+            <base-name>forms.text.formfive</base-name> 
+            <var>formfive</var> 
+        </resource-bundle> 
+         <resource-bundle> 
+            <base-name>forms.text.formsix</base-name> 
+            <var>formsix</var> 
+        </resource-bundle> 
+        <resource-bundle> 
+            <base-name>forms.text.formcommon</base-name> 
+            <var>form</var> 
+        </resource-bundle> 
+    </application>
+    
+    <navigation-rule> 
+        <navigation-case> 
+            <from-outcome>error</from-outcome> 
+            <to-view-id>/errorpage.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule> 
+
+</faces-config>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+        <div class="normalMainForm1">
+
+
+
+
+            <p:layout style=" height: 650px; ">
+
+
+
+                <p:layoutUnit position="west"  header="Структура1" collapsible="true"  >
+
+                    <h:form id="form1">  
+                        <p:panelGrid columns="1" styleClass="invisibleBorder1"  style="text-align: left" >
+                            <p:growl id="messages" showDetail="true" /> 
+                            <p:tree value="#{departmentPageBeanNew.root}" var="node" dynamic="true" cache="false"  
+                                    selectionMode="single"  selection="#{departmentPageBeanNew.selectedNode}" id="tree">  
+
+                                <p:ajax event="expand" update=":form1:messages " listener="#{departmentPageBeanNew.onNodeExpand}" />  
+                                <p:ajax event="collapse" update=":form1:messages" listener="#{departmentPageBeanNew.onNodeCollapse}" />  
+                                <p:ajax event="select" update=":form1:messages,:form1:tree,:form2" listener="#{departmentPageBeanNew.onNodeSelect}" />  
+                                <p:ajax event="unselect" update=":form1:messages" listener="#{departmentPageBeanNew.onNodeUnselect}" />  
+
+                                <p:treeNode>  
+                                    <h:outputText value="#{node}" />  
+                                </p:treeNode>  
+                            </p:tree> 
+                        </p:panelGrid> 
+                    </h:form>  
+
+                </p:layoutUnit>        
+
+                <p:layoutUnit position="center"> 
+                    <h:form id="form2">
+                    <ui:include src="#{departmentPageBeanNew.address}" />
+                    </h:form>
+                </p:layoutUnit>
+            </p:layout>
+        </div>
+    </ui:define>
+
+
+</ui:composition>
+
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        
+        <!-- Database connection settings
+       <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/zero1</property> -->
+        <property name="connection.driver_class">com.ibm.db2.jcc.DB2Driver</property>
+        <property name="connection.url">jdbc:db2://10.58.3.151:50000/zero</property>
+        <property name="connection.username">db2admin</property>
+        <property name="connection.password">As123456</property>
+        <property name="connection.charSet">cp1251</property>
+        <property name="connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
+        <!-- JDBC connection pool (use the built-in)-->
+        <!--property name="connection.pool_size">20</property-->
+        <property name="hibernate.c3p0.min_size">3</property>
+        <property name="hibernate.c3p0.max_size">1000</property>
+        <property name="hibernate.c3p0.timeout">60</property>
+        <property name="hibernate.c3p0.max_statements">6</property>
+        <property name="hibernate.c3p0.idle_test_period">10</property>
+        
+        <!-- SQL dialect
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property> -->
+        <property name="dialect">org.hibernate.dialect.DB2Dialect</property>
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <!-- Drop and re-create update the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+        <!-- Names the annotated entity class -->
+        <mapping class="rzd.vivc.aszero.dto.ReportDetailsForm2"/>
+        <mapping class="rzd.vivc.aszero.dto.Department"/>
+        <mapping class="rzd.vivc.aszero.dto.Measure"/>
+        <mapping class="rzd.vivc.aszero.dto.TypeTER"/>
+        <mapping class="rzd.vivc.aszero.dto.Resource"/>
+        <mapping class="rzd.vivc.aszero.dto.Counter"/>
+        <mapping class="rzd.vivc.aszero.dto.InputASKYE"/>
+        <mapping class="rzd.vivc.aszero.dto.InputASKYEInfo"/>
+        <mapping class="rzd.vivc.aszero.dto.Report"/>
+        <mapping class="rzd.vivc.aszero.dto.Costs"/>
+        <mapping class="rzd.vivc.aszero.dto.ReportDetails"/>
+        <mapping class="rzd.vivc.aszero.dto.form.Form"/>
+        <mapping class="zdislava.model.dto.security.users.User"/>
+        <mapping class="zdislava.model.dto.security.users.UserType"/>
+        <mapping class="rzd.vivc.aszero.dto.CostDetails"/>
+        <mapping class="rzd.vivc.aszero.dto.DepartmentGroup"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="normalForm1" >
+         <p:growl id="msgs" showDetail="true" />
+    
+                        
+                        <h:panelGrid  columns="2"  styleClass="cont"  id="qwer"> 
+                            
+                            
+                           
+
+                            
+                            
+                            
+                             <h:selectOneMenu value="#{formBean.frm}" >
+                                 <f:selectItem itemValue="0" itemLabel="Выберите"/>
+                                 <f:selectItems  value="#{formBean.listForm}"   var="f" itemValue="#{f.id}№#{f.pageAddress}" itemLabel="#{f.fullNameForm}"/>
+                                 <f:ajax />
+                                  
+                            </h:selectOneMenu>
+                           
+                            
+
+
+                            
+                            
+                         
+                       
+         
+                            <h:selectOneMenu id="l1" value="#{formBean.yearBeg}" >
+                                <f:selectItem itemValue="2013" itemLabel="2013"/>
+                                <f:selectItem itemValue="2014" itemLabel="2014"/>
+                                <f:selectItem itemValue="2015" itemLabel="2015"/>
+                                <f:selectItem itemValue="2016" itemLabel="2016"/>
+                                <f:selectItem itemValue="2017" itemLabel="2017"/>
+                                <f:selectItem itemValue="2018" itemLabel="2018"/>
+                                <f:selectItem itemValue="2019" itemLabel="2019"/>
+                                <f:selectItem itemValue="2020" itemLabel="2020"/>
+                                   <f:ajax/>
+                            </h:selectOneMenu>
+                            
+                            
+         
+          <p:outputLabel  for="l2" value="Окончание периода" rendered="#{5==4}" /> 
+ 
+                              <h:selectOneMenu id="l2"  value="#{formBean.yearEnd}"  rendered="#{5==4}" >
+                                <f:selectItem itemValue="2013" itemLabel="2013"/>
+                                <f:selectItem itemValue="2014" itemLabel="2014"/>
+                                <f:selectItem itemValue="2015" itemLabel="2015"/>
+                                <f:selectItem itemValue="2016" itemLabel="2016"/>
+                                <f:selectItem itemValue="2017" itemLabel="2017"/>
+                                <f:selectItem itemValue="2018" itemLabel="2018"/>
+                                <f:selectItem itemValue="2019" itemLabel="2019"/>
+                                <f:selectItem itemValue="2020" itemLabel="2020"/>
+                            </h:selectOneMenu>
+         </h:panelGrid> 
+         
+                   <h:commandButton value="Обновить" >
+                                <f:ajax render="list1" event="click" listener="#{formBean.updateListRepDateDep()}"/>
+                            </h:commandButton>     
+                        
+                        
+         <p:dataList id="list1"  value="#{ formBean.listRepForm}"    var="rep" itemType="none" emptyMessage="Сформируйте отчет">  
+             <h:link target="_blank" outcome="#{formBean.frmAddress}" value="#{rep.name}">
+                                <f:param name="id" value="#{rep.id}"/>
+                        </h:link>
+                            
+                            
+                            
+                        </p:dataList> 
+                      
+
+                 
+
+
+
+
+            
+          
+          
+        
+        </div>
+    </h:body>
+</html>
+

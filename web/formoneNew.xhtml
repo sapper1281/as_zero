@@ -1,0 +1,461 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="form" rendered="#{formOnePageBean.session!=null &amp;&amp; formOnePageBean.session.user!=null}">
+            <p:panelGrid columns="1" styleClass="invisibleBorder">
+                <p:dialog id="modalDialog"    widgetVar="dlg2" modal="true" styleClass="pixSousend" dynamic="true" width="1000" height="400">
+                    <h:form id="form11">
+
+                        <p:panelGrid columns="1" >
+                            <p:outputLabel value="#{formsix.form}" styleClass="formNumber"/>
+
+
+                            <p:outputLabel value="#{formsix.header}" styleClass="report"/>
+                            <p:panelGrid columns="2" styleClass="invisible" columnClasses="leftHeaderColumn, rightColumn">
+                                <p:outputLabel value="#{formsix.department}" styleClass="reportHeader"/>
+                                <p:outputLabel value="#{formSixPageBean.one.rep.usr.department.nameNp}"/>
+                            </p:panelGrid>
+                            <p:growl id="messages1" showDetail="true"/>
+
+                            <p:dataTable  var="car" value="#{formSixPageBean.list}"  rowKey="#{car.id}"
+                                          id="report1" styleClass="cont, tooBigTableHeader" 
+                                          editable="true" emptyMessage="Нет мероприятий"
+                                          >
+
+                                <p:ajax event="rowEdit" listener="#{formSixPageBean.onEdit}" />
+                                <p:ajax event="rowEditCancel" listener="#{formSixPageBean.onCancel}"  />
+
+                                <p:columnGroup  type="header">  
+                                    <p:row>  
+                                        <p:column rowspan="2" colspan="1" headerText="#{formsix.one}"/>  
+                                        <p:column rowspan="1" colspan="8" headerText="#{formsix.two}"/>  
+                                        <p:column rowspan="1" colspan="2" headerText="#{formsix.three}"/>  
+                                        <p:column rowspan="2" colspan="1" headerText="#{formsix.four}"/>  
+                                    </p:row> 
+                                    <p:row>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_1}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_2}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_3}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_4}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_5}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_6}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_7}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_8}"/>  
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_9}"/> 
+                                        <p:column rowspan="1" colspan="1" headerText="#{formsix.two_10}"/>  
+                                    </p:row> 
+                                </p:columnGroup>  
+
+
+                                <p:column >
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{formSixPageBean.list.indexOf(car)+1}"/>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:outputLabel value="#{formSixPageBean.list.indexOf(car)+1}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.activity}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:outputLabel value="#{car.activity}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.responsible}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{car.responsible}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.addres}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{car.addres}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.powerSource}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{car.powerSource}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.addressOfObject}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{car.addressOfObject}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.type}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:outputLabel rendered="#{car.askue}" value="#{car.type}" />
+                                            <p:inputText rendered="#{!car.askue}" value="#{car.type}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.num}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{car.num}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel rendered="#{car.askue}" value="Да" />
+                                            <p:outputLabel rendered="#{!car.askue}" value="Нет" />
+                                        </f:facet>}
+                                        <f:facet name="input">
+                                            <p:outputLabel rendered="#{car.askue}" value="Да" />
+                                            <p:outputLabel rendered="#{!car.askue}" value="Нет" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.usedBefore}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{car.usedBefore}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.usedToday}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText  value="#{car.usedToday}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:outputLabel value="#{car.economy}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:outputLabel value="#{car.economy}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+
+                                <p:column>
+                                    <p:rowEditor />
+                                </p:column>
+
+                            </p:dataTable>
+                            <h:commandButton  value="ОК" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
+
+                        </p:panelGrid> 
+                    </h:form>
+                </p:dialog>  
+
+
+                <p:outputLabel value="#{formone.form}" styleClass="formNumber"/>
+                <p:outputLabel value="#{formone.header}" styleClass="report"/>
+
+                <p:panelGrid columns="2" styleClass="invisible" columnClasses="leftHeaderColumn, rightColumn">
+                    <p:outputLabel value="#{formone.department}" styleClass="reportHeader"/>
+                    <p:outputLabel value="#{formOnePageBean.rep.usr.department.nameNp}"/>
+                </p:panelGrid>
+
+
+                <p:outputLabel value="#{formone.time}" styleClass="reportHeader"/>
+
+                <p:panelGrid columns="5" styleClass="invisible">
+                    <p:outputLabel value="#{formone.timeFrom}"/> 
+                    <h:panelGrid id="panel1" columns="2" class="withoutBorder" rowClasses="withoutBorder" columnClasses="withoutBorder, withoutBorder"> 
+
+                        <p:calendar  readonlyInput="true" disabled="#{(formOnePageBean.bloc_rec_fact||formOnePageBean.t_dep_form)&amp;&amp;!formOnePageBean.rep.solveInputPlan}" value="#{formOnePageBean.rep.time_begin}" id="popupButton2Cal" showOn="button" locale="ru" navigator="true" pattern="HH:00" timeOnly="true">
+                            <p:ajax event="dateSelect" listener="#{formOnePageBean.addDate}" update=":hh:report"  />  
+                        </p:calendar>
+
+                        <p:dialog header="Selected Dates" widgetVar="dialog" 
+                                  showEffect="fade" hideEffect="fade">
+                            <h:outputText value="#{formOnePageBean.rep.time_begin}" id="popupButton2Date">
+                                <f:convertDateTime pattern="hh:00"/>
+                            </h:outputText>
+                        </p:dialog>
+                    </h:panelGrid>
+
+                    <p:outputLabel value="#{formone.timeTo}"/>
+                    <h:panelGrid id="panel2" columns="2" class="withoutBorder" rowClasses="withoutBorder" columnClasses="withoutBorder, withoutBorder"> 
+                        <p:calendar readonlyInput="true" disabled="#{(formOnePageBean.bloc_rec_fact||formOnePageBean.t_dep_form)&amp;&amp;!formOnePageBean.rep.solveInputPlan}" value="#{formOnePageBean.rep.time_finish}" id="popupButton1Cal" showOn="button" locale="ru" navigator="true" pattern="HH:00" timeOnly="true">
+                            <p:ajax event="dateSelect" listener="#{formOnePageBean.addDate}" update=":hh:report"  />  
+                        </p:calendar>
+                        <p:dialog header="Selected Dates" widgetVar="dialog" 
+                                  showEffect="fade" hideEffect="fade">
+                            <h:outputText value="#{formOnePageBean.rep.time_finish}" id="popupButton1Date">
+                                <f:convertDateTime pattern="hh:00"/>
+                            </h:outputText>
+                        </p:dialog>
+                    </h:panelGrid>
+                    <h:panelGrid id="panel3" columns="2" class="withoutBorder" rowClasses="withoutBorder" columnClasses="withoutBorder, withoutBorder"> 
+                        <p:calendar disabled="true"  value="#{formOnePageBean.rep.dt_begin}" id="popupButton3Cal" locale="ru" navigator="true" pattern="dd.MM.yyyy"/>  
+
+
+
+                    </h:panelGrid>
+                </p:panelGrid>
+            </p:panelGrid>
+        </h:form>
+        <h:form id="hh">
+            <p:growl id="messages" showDetail="true"/>
+
+            
+            <p:outputLabel value=" Обратите внимание:" style="color: red"/>
+            <p:outputLabel value=" 1. Ввод чисел производится через точку" styleClass="centerBlok"/>
+            <p:outputLabel value=" 2. Необходимо наличие 13 видов ресурсов(газ природный, Бензин, Топочный мазут, Уголь сортовой, Уголь рядовой, Масло," styleClass="centerBlok"/>
+            <p:outputLabel value="    Уборка территории шт, Уборка территории м, Электроэнергия, Озеленение территории шт, Озеленение территории м,Дизельное топливо,Теплоэнергия)" styleClass="centerBlok"/>
+            <p:outputLabel value="    +Сокращение выбросов загрязняющих веществ в атмосферу,т" styleClass="centerBlok"/>
+            <p:outputLabel value=" 3. Время проведения акции с 13-00 по 15-00" styleClass="centerBlok"/>
+            <p:outputLabel value=" 4. Если нет плана или факта необходимо проставлять '0'" styleClass="centerBlok"/>
+           
+            
+            
+            <p:contextMenu for="report" rendered="#{(!formOnePageBean.t_dep_form)&amp;&amp;(!formOnePageBean.bloc_rec_fact||formOnePageBean.rep.solveInputPlan)}" >  
+                <p:menuitem value="Удалить" update=":hh:report"  icon="ui-icon-close" actionListener="#{formOnePageBean.deleteReportDetails}"/>
+            </p:contextMenu>  
+
+
+            <p:dataTable  var="car" value="#{formOnePageBean.rep.details}"  rowKey="#{car.addID}"
+                          selection="#{formOnePageBean.selectedDetails}"
+                          selectionMode="single"
+                          id="report" styleClass="cont" 
+                          editable="true" emptyMessage="Нет мероприятий"
+                          >
+
+
+                <p:ajax event="rowEdit" listener="#{formOnePageBean.onEdit}" update=":hh:report" />
+                <p:ajax event="rowEditCancel" listener="#{formOnePageBean.onCancel}"/>
+
+                <p:columnGroup  type="header">  
+                    <p:row>  
+                        <p:column rowspan="2" colspan="1" headerText="#{formone.one}"/>  
+                        <p:column rowspan="2" colspan="1" headerText="#{formone.two}"/>  
+                        <p:column rowspan="1" colspan="3" headerText="#{formone.three}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="3" headerText="#{formone.four}"/>  
+                        <p:column rowspan="2" colspan="1" headerText=""/>  
+                    </p:row> 
+                    <p:row>  
+                        <p:column rowspan="1" colspan="1" headerText="#{formone.two_1}"/>  
+                        <p:column rowspan="1" colspan="1" headerText="#{formone.two_2}"/>  
+                        <p:column rowspan="1" colspan="1" headerText="#{formone.two_3}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="1" headerText="#{formone.two_1}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="1" headerText="#{formone.two_2}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="1" headerText="#{formone.two_3}"/>  
+                    </p:row> 
+                </p:columnGroup>  
+
+
+                <p:column >
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.resource.string}" escape="false"/>
+
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu value="#{car.resource}"  converter="resourceConverter" style="width: 180px" rendered="#{car.resource.koef_polution!=-1}" disabled="#{(formOnePageBean.bloc_rec_fact&amp;&amp;car.id!=0)  &amp;&amp;!formOnePageBean.rep.solveInputPlan}">
+                                <f:selectItems value="#{formOnePageBean.list}"
+                                               var="man" 
+                                               itemLabel="#{man.string}"
+                                               itemValue="#{man}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{car.resource.string}" rendered="#{car.resource.koef_polution==-1}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">                 
+                            <p:commandLink id="modalDialogButton" value="#{car.activity}" rendered="#{car.resource.name.equalsIgnoreCase('Электроэнергия')}"  onclick="dlg2.show();"/>          
+                            <h:outputText value="#{car.activity}" rendered="#{!car.resource.name.equalsIgnoreCase('Электроэнергия')}"  />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.activity}" disabled="#{car.resource.koef_polution==-1}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.plan_col}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.plan_col}" disabled="#{(formOnePageBean.bloc_rec_fact &amp;&amp; car.id!=0 &amp;&amp; !formOnePageBean.rep.solveInputPlan) || car.resource.koef_polution==-1}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.plan_col*car.resource.koef}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.plan_col*car.resource.koef}" disabled="true"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.plan_money}" >
+                                <f:convertNumber maxFractionDigits="3"/>
+                            </p:outputLabel>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.plan_money}" disabled="true"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column rendered="#{formOnePageBean.t_fact_form}">
+                    <p:cellEditor  rendered="true">
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.fact_col}" rendered="#{car.dt_inputFact_test}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.fact_col}"  disabled="#{car.resource.name.equalsIgnoreCase('Электроэнергия')||car.resource.koef_polution==-1}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column rendered="#{formOnePageBean.t_fact_form}">
+                    <p:cellEditor  rendered="true">
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.fact_col*car.resource.koef}" rendered="#{car.dt_inputFact_test}" >
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.fact_col*car.resource.koef}" disabled="true"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column rendered="#{formOnePageBean.t_fact_form}">
+                    <p:cellEditor  rendered="true">
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.fact_money}" rendered="#{car.dt_inputFact_test}">
+                                <f:convertNumber maxFractionDigits="3"/>
+                            </p:outputLabel>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.fact_money}" disabled="true"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:rowEditor />
+                </p:column>
+
+                <f:facet name="footer">
+                    <h:commandButton rendered="#{(!formOnePageBean.t_dep_form)&amp;&amp;(formOnePageBean.bloc_out_time_input_all||formOnePageBean.rep.solveInputPlan)}" value="#{formone.newLine}" action="#{formOnePageBean.addRow}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
+                </f:facet>
+            </p:dataTable>
+            <h:commandLink>  
+                <p:graphicImage library="img" name="excel.png"  />                   
+                <p:dataExporter type="xls" target="report" fileName="formone" postProcessor="#{formOnePageBean.Print}" />  
+            </h:commandLink> 
+
+        </h:form>
+
+        <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+            <p:outputLabel value="#{formone.dt_create}"/>
+            <p:outputLabel value="#{formOnePageBean.rep.dt_createString}"/>
+            <p:outputLabel value="#{formone.user}"/>
+            <p:outputLabel value="#{formOnePageBean.rep.usr.FIO}"/>
+            <p:outputLabel value="#{formone.phone}"/>
+            <p:outputLabel value="#{formOnePageBean.rep.usr.phoneNumber}"/>
+            
+<p:outputLabel value="1111#{formone.edit_user}" rendered="#{formOnePageBean.rep.solveInputPlan&amp;&amp;((formOnePageBean.sp_blok&amp;&amp;formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID)||formOnePageBean.ntec_blok)}"/>
+<p:outputLabel value="#{formOnePageBean.rep.usrSolvePlanInput.FIO}" rendered="#{formOnePageBean.rep.solveInputPlan&amp;&amp;((formOnePageBean.sp_blok&amp;&amp;formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID)||formOnePageBean.ntec_blok)}"/>
+            
+            
+            <p:outputLabel value="#{formone.redact_alow}" styleClass="boldText" rendered="#{(formOnePageBean.sp_blok&amp;&amp;formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID)||formOnePageBean.ntec_blok}"/>  
+            <h:form rendered="#{(formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID)||formOnePageBean.ntec_blok}">  
+                
+                
+                <p:selectBooleanCheckbox value="#{formOnePageBean.rep.solveInputPlan}" rendered="#{(formOnePageBean.sp_blok&amp;&amp;(formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID))||formOnePageBean.ntec_blok}">  
+                    <p:ajax listener="#{formOnePageBean.addMessage}"/>  
+                </p:selectBooleanCheckbox> 
+                
+            </h:form>
+
+            <h:form class="left">
+
+                <p:commandButton  rendered="#{(!formOnePageBean.t_dep_form)&amp;&amp;
+                                              (formOnePageBean.bloc_out_time_input_all||
+                                              (formOnePageBean.rep.solveInputPlan&amp;&amp;formOnePageBean.sp_blok)||
+                                              formOnePageBean.button_ntec_blok
+                                              )}" value="#{formone.save}" action="#{formOnePageBean.save}" />
+                <h:button rendered="#{formOnePageBean.session.user.idType!=4}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button" value="Назад" outcome="mainpage" />
+
+            </h:form>
+        </p:panelGrid>
+
+
+    </ui:define>
+
+</ui:composition>

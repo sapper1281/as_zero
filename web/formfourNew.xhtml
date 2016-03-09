@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:panelGrid columns="1" styleClass="invisibleBorder">
+
+                <p:outputLabel id="dt"   value="#{formfour.form}  за #{formFourPageBeanNew.mes_new}" styleClass="formNumber"/>
+                <p:outputLabel value="#{formfour.poligon}"  styleClass="centerHeader"/>
+
+
+                <p:growl id="messages" showDetail="true"/>
+
+                <p:dataTable var="car" value="#{formFourPageBeanNew.detailsForm4List}" editMode="cell" id="report" styleClass="cont" editable="true" emptyMessage="Нет мероприятий">
+
+
+
+                    <p:columnGroup  type="header">  
+                        <p:row>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell1}"/>  
+
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell5}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell6}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell7}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell8}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell9}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell10}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfour.cell11}"/>  
+                        </p:row> 
+                    </p:columnGroup> 
+
+
+                    <p:column>
+
+
+                        <h:link outcome="formtwoNew_1" value="#{car.namenp}" rendered="#{car.idF2!=null&amp;&amp;car.idF2!=-1}">
+                            <f:param name="id" value="#{car.idF2}"/>
+
+                        </h:link>
+
+
+                        <h:outputText value="#{car.namenp}(Не сформирована форма 2)" rendered="#{car.idF2==null&amp;&amp;formFourPageBeanNew.t_mes1}"/>   
+
+<h:outputText value="#{car.namenp}" rendered="#{car.idF2==-1}"/> 
+
+
+ <h:outputText value="#{car.namenp}" rendered="#{car.idF2==null&amp;&amp;!formFourPageBeanNew.t_mes1}"/>   
+
+
+                    </p:column>
+
+
+
+
+                    <p:column >     
+                        <h:outputText value="#{car.planProc}" rendered="#{car.idF2!=-1}"/>
+                        <h:outputText value="" rendered="#{car.idF2==-1}"/> 
+                    </p:column>
+                    <p:column >    
+                        <h:outputText value="#{car.factProc}" rendered="#{car.idF2!=-1}"/>
+                        <h:outputText value="" rendered="#{car.idF2==-1}"/> 
+                    </p:column >
+
+                    <p:column>
+
+                        <p:outputLabel value="#{car.plan_tyt}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+
+                        <p:outputLabel value="#{car.fact_tyt}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+
+                        <p:outputLabel value="#{car.planE}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+
+                        <p:outputLabel value="#{car.factE}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+
+
+
+                    <p:column> 
+                        <p:outputLabel value="#{car.factASKUE}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+
+
+                    <f:facet name="footer">
+
+                    </f:facet>
+
+
+                </p:dataTable>
+
+                <h:commandLink>  
+                    <p:graphicImage library="img" name="excel.png"  />                   
+                    <p:dataExporter type="xls" target="report" fileName="cars" postProcessor="#{formFourPageBeanNew.Print}" />  
+                </h:commandLink>     
+
+
+
+                <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+
+                    <h:button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button" value="Назад" outcome="mainpage" />
+
+
+                </p:panelGrid>
+            </p:panelGrid>
+
+
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

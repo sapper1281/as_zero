@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+
+        <p:panelGrid columns="1" styleClass="invisibleBorder1"  style="text-align: left">
+
+            <p:commandLink id="exit"  value="Отчеты" action="mainpage" /> 
+            <p:tabView id="tabView" dynamic="true"  >  
+
+
+
+
+
+                <p:tab id="playerTab1" title="Предприятие"  >  
+
+                    <p:panel rendered="#{departmentPageBeanNew.deparSelect}">  
+                        <f:facet  name="footer">
+                            <p:panelGrid columns="3"  >
+                                <p:commandLink update=":form1:tree,:form2"  actionListener="#{departmentPageBeanNew.save}" value="#{msgs.saveDepartment}"/>
+                                <p:commandLink update=":form1:tree,:form2"  actionListener="#{departmentPageBeanNew.update}" value="#{msgs.updateDepartment1}"/>
+                                <p:commandLink update=":form1:tree,:form2"  actionListener="#{departmentPageBeanNew.del}" value="#{msgs.delDepartment}"/>
+
+                            </p:panelGrid>
+
+                        </f:facet>
+                        <h3>#{departmentPageBeanNew.depar}</h3>
+                        <p:panelGrid columns="2"  >
+
+                            <h:outputLabel for="inputTextDep" value="#{msgs.inputDepartment}" />  
+                            <p:inputText id="inputTextDep" value="#{departmentPageBeanNew.depar.nameNp}"/>
+
+
+                            <h:outputLabel for="inputCal0" value="#{msgs.dateDepartment}" />  
+                            <p:calendar value="#{departmentPageBeanNew.depar.dtBeginNSI}" id="inputCal0" navigator="true" showOn="button" pattern="dd.MM.yyyy" locale="ru"  />  
+
+                            <h:outputLabel for="inputCal0_1" value="#{msgs.dateDepartment1}" />  
+                            <p:calendar value="#{departmentPageBeanNew.depar.dt_end}" id="inputCal0_1" navigator="true" showOn="button" pattern="dd.MM.yyyy" locale="ru"  />  
+
+                            <h:outputLabel for="inputNum" value="#{msgs.inputNum}" />  
+                            <p:inputText id="inputNum" value="#{departmentPageBeanNew.depar.num}"/>
+
+                            <h:outputLabel value="В составе" />
+
+
+                            <p:selectOneMenu value="#{departmentPageBeanNew.depar.departmentGroup_id}" converter="groupConverter">
+                                <f:selectItem itemLabel="Нет" itemValue="" />
+                                <f:selectItems value="#{departmentPageBeanNew.depGroup}" var="group" itemLabel="#{group.nameNp}" itemValue="#{group}"/>
+                                
+                            </p:selectOneMenu>                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </p:panelGrid>
+                    </p:panel>
+                </p:tab> 
+
+
+
+
+
+
+
+
+
+
+
+
+                <p:tab id="playerTab3" title="Пользователи"   >  
+
+                    <p:panel rendered="#{departmentPageBeanNew.deparSelect}">  
+                        <f:facet  name="footer">
+                            <p:panelGrid columns="2"  >
+                                <h:commandLink id="submit"  value="Добавить" action="#{usersPageBeanNew1.editItem()}">
+                                    <f:param name="id" value="0" />
+                                    <f:param name="dep" value="#{departmentPageBeanNew.depar.id}" />
+                                </h:commandLink>
+
+                            </p:panelGrid>
+
+                        </f:facet>
+                        <h3>#{departmentPageBeanNew.depar}</h3>
+                        <p:dataTable id="dataTable" var="item" value="#{usersPageBeanNew1.beanList}" widgetVar="carsTable" 
+                                     styleClass="-moz-border-radius: 20px"
+                                     emptyMessage="Нет пользователей удовлетворяющих условию" filteredValue="#{usersPageBeanNew1.filteredBeanList}">   
+
+                            <p:column id="log" headerText="Логин" filterBy="#{item.login}" filterMatchMode="startsWith" sortBy="#{item.login}">  
+                                <h:outputText value="#{item.login}" />  
+                            </p:column>  
+
+                            <p:column id="fio" headerText="ФИО" filterBy="#{item.FIO}" filterMatchMode="contains" sortBy="#{item.FIO}">  
+                                <h:outputText value="#{item.FIO}" />  
+                            </p:column> 
+
+                            <p:column id="phone" headerText="Телефон" filterBy="#{item.phoneNumber}" filterMatchMode="contains" sortBy="#{item.phoneNumber}">  
+                                <h:outputText value="#{item.phoneNumber}" />  
+                            </p:column> 
+                            
+                            <p:column id="forms" headerText="Доступ к формам">  
+                                <h:outputText value="#{item.formsString}" />  
+                            </p:column> 
+
+                            <p:column id="flag">  
+                                <h:outputText value="Удален" rendered="#{item.deleted}"/>  
+                            </p:column> 
+
+                            <p:column headerText="">  
+                                <div class="centralizationDiv">
+                                    <h:commandLink value="Редактировать" action="#{usersPageBeanNew1.editItem()}">
+                                        <f:param name="id" value="#{item.id}" />
+                                        <f:param name="dep" value="#{departmentPageBeanNew.depar.id}" />
+                                    </h:commandLink>
+                                </div>
+                            </p:column> 
+
+                        </p:dataTable>
+                    </p:panel>
+
+
+                </p:tab> 
+
+            </p:tabView>
+
+        </p:panelGrid> 
+    </h:body>
+</html>
+

@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="content">
+        <p:outputLabel id="dt"  value="Период: #{grafPageBean.mes_new}" styleClass="formNumber"/><br/>
+                <p:outputLabel value="Результат проверки акции"  styleClass="centerHeader"/>
+                
+                <p:dataTable var="graf" value="#{grafPageBean.reportFormGraf}"  id="report" styleClass="cont" editable="true" emptyMessage="Нет мероприятий">
+
+
+
+                    <p:columnGroup  type="header">  
+                        <p:row>  
+                            <p:column  headerText="Год"/>  
+                            <p:column headerText="Номер месяца"/>  
+                            <p:column  headerText="Дирекция, Служба"/>  
+                            <p:column headerText="Структурное подразделение"/>  
+                            <p:column  headerText="Кол-во"/>    
+                        </p:row> 
+</p:columnGroup>  
+                     <p:column >
+                         <p:outputLabel value="#{graf.year1 }" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                     <p:column >
+                         <p:outputLabel value="#{graf.month1 }" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                     <p:column >
+                         <p:outputLabel value="#{graf.depPerNameNP }" >
+                           
+                        </p:outputLabel>
+                    </p:column>
+                     <p:column >
+                         <p:outputLabel value="#{graf.depNameNP }" >
+                        </p:outputLabel>
+                    </p:column>
+                   <p:column >
+                       <p:outputLabel value="#{graf.d }" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    
+                    
+                </p:dataTable>
+                 <p:outputLabel value="График cэкономленного воздуха в человеко-днях"  styleClass="centerHeader"/>
+                <p:outputLabel value="Сэкономлено дней: #{grafPageBean.dd}"  styleClass="centerHeader"/>
+               
+<h:panelGrid columns="2" columnClasses="left,right"  styleClass="cont" >
+    <!--p:chart type="bar" model="#{grafPageBean.animatedModel2}"  styleClass="cont"  /-->
+</h:panelGrid>
+                
+               <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+                   
+
+
+
+                    <h:button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button" value="Назад" outcome="grafdate" />
+
+
+                </p:panelGrid>  
+                
+                
+   </ui:define>
+
+</ui:composition>
+

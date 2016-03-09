@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <ui:define name="content">
+        <p:outputLabel value="#{formBean.nameDep}" styleClass="reportHeader"/>
+        
+        <p:tabView  id="tabView" var="forma" value="#{formBean.listForm}">  
+
+            <p:tab id="playerTab" title="#{forma.fullNameForm}" >  
+              
+                <p:dataList value="#{ formBean.getListRep(forma.id)}" var="rep" >  
+
+                    <h:link outcome="#{forma.pageAddress}" value="#{rep.title}">
+                        <f:param name="id" value="#{rep.id}"/>
+                    </h:link>
+
+                </p:dataList> 
+             
+                
+     
+      
+                
+                
+                <h:button value="Новый отчет" outcome="#{forma.pageAddress}"  class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button1">
+                    <f:param name="form_id" value="#{forma.id}"/>
+                </h:button>
+              
+              
+            </p:tab>  
+
+        </p:tabView>
+    </ui:define>
+
+</ui:composition>

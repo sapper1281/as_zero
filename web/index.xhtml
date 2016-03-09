@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="left">
+        <div id="left">
+            
+            <div class="contact"> 
+                <h:form>
+                    <p:commandLink  value="Инструкция Пользователя" ajax="false" >  
+                        <p:fileDownload value="#{fileDownloadController.file}" />  
+                    </p:commandLink>
+                </h:form>
+            </div>
+            
+            <div class="contact"> 
+                <h:form>
+                    <p:commandLink  value="Инструкция Администратора" ajax="false" >  
+                        <p:fileDownload value="#{fileDownloadControllerAdmin.file}" />  
+                    </p:commandLink>
+                </h:form>
+            </div>
+            <!--div class="contact"> 
+                <h:form>
+                    <p:commandLink  value="Регламент взаимодействия" ajax="false" >  
+                        <p:fileDownload value="#{fileDownloadControllerReg.file}" />  
+                    </p:commandLink>
+                </h:form>
+            </div-->
+            
+            <div class="contact"> 
+                <h:form>
+                    
+                     <p:commandLink  value="Google Chrome" ajax="false" >  
+                         <p:fileDownload value="#{fileDownloadControllerGoogle.file}" />  
+                    </p:commandLink>
+                </h:form>
+            </div>
+
+            
+           
+
+            <div class="questions">
+                <p:outputLabel value="#{msgs.questions_to}"/>
+            </div>
+
+            <div class="contact">
+                <p:outputLabel value="#{msgs.position_department}" styleClass="contactSpan"/>
+                <p:outputLabel value="#{msgs.coder}" styleClass="contactSpan"/>
+                <p:outputLabel value="#{msgs.phone}" styleClass="contactSpan"/>
+            </div>
+
+            <div class="contact">
+                <p:outputLabel value="#{msgs.coder_1}" styleClass="contactSpan"/>
+                <p:outputLabel value="#{msgs.phone_1}" styleClass="contactSpan"/>
+            </div>
+            
+          
+            <div class="questions">
+                <p:outputLabel value="#{msgs.questions_to_2}"/>
+            </div>
+
+            <div class="contact">
+                <p:outputLabel value="#{msgs.position_department_2}" styleClass="contactSpan"/>
+                <p:outputLabel value="#{msgs.coder_2}" styleClass="contactSpan"/>
+                <p:outputLabel value="#{msgs.phone_2}" styleClass="contactSpan"/>
+            </div>
+            
+           
+
+        </div>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="normalForm">
+            <h1>#{msgs.welcome}</h1>
+
+            <h:form>
+                <h:panelGrid columns="2" styleClass="fullWidth" columnClasses="leftColumn, rightColumn">
+                    
+                    <p:outputLabel for="login" value="#{msgs.login}"/>
+                    <p:inputText value="#{autorisationPageBean.login}" required="true" requiredMessage="Введите логин" id="login" tabindex="1" styleClass="longWidth"/> 
+                    <p:outputLabel for="password" value="#{msgs.password}"/>
+                    <p:password value="#{autorisationPageBean.password}" required="true" requiredMessage="Введите пароль" id="password" tabindex="2" styleClass="longWidth"/> 
+                </h:panelGrid>  
+
+                <h:commandButton id="enter" action="#{autorisationPageBean.logIn}" tabindex="3" value="#{msgs.OK}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
+
+                <p:messages/>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

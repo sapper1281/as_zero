@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:panelGrid columns="1" styleClass="invisibleBorder">
+
+                <p:outputLabel id="dt"  value="#{formtree.form} за #{formTreePageBean1New.mes_new}" styleClass="formNumber"/>
+                <p:outputLabel value="Результат проверки акции"  styleClass="centerHeader"/>
+                <p:outputLabel value="Отчет"  styleClass="centerHeader"/>
+
+                <p:growl id="messages" showDetail="true"/>
+
+                <p:dataTable var="car" value="#{formTreePageBean1New.reportDetailsForm5List}"  id="report" styleClass="cont" editable="true" emptyMessage="Нет мероприятий">
+
+
+
+                    <p:columnGroup  type="header">  
+                        <p:row>  
+                           
+                            <p:column rowspan="1" colspan="3" headerText="#{formfive.cell1_2_3}"/>  
+                            <p:column rowspan="1" colspan="4" headerText="#{formfive.cell4_5_6_7}"/>  
+                            <p:column rowspan="1" colspan="2" headerText="#{formfive.cell8_9}"/>  
+                            <p:column rowspan="1" colspan="2" headerText="#{formfive.cell10_11}"/>  
+                            <p:column rowspan="1" colspan="2" headerText="#{formfive.cell12_13}"/>   
+                        </p:row> 
+                        <p:row>  
+                            <p:column rowspan="1" colspan="2" headerText="#{formfive.cell1_2}"/>  
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell3}"/>  
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell4}"/>  
+                            <p:column rowspan="1" colspan="2" headerText="#{formfive.cell5_6}"/>  
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell7}"/>   
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell8}"/>  
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell9}"/>  
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell10}"/>  
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell11}"/>  
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell12}"/>   
+                            <p:column rowspan="2" colspan="1" headerText="#{formfive.cell13}"/>  
+                        </p:row> 
+                        <p:row>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfive.cell1}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfive.cell2}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfive.cell5}"/>  
+                            <p:column rowspan="1" colspan="1" headerText="#{formfive.cell6}"/>  
+                        </p:row> 
+                    </p:columnGroup> 
+
+
+
+                    
+              
+                    
+                    
+                    
+                    
+                    
+                    <p:column >
+                        <p:outputLabel value="#{car.planE}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{car.factE}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{car.factEM}" >
+                            <f:convertNumber maxFractionDigits="3"/>
+                        </p:outputLabel>
+                    </p:column>
+
+
+                    <p:column>
+                        <table >
+                            <p:subTable var="type_ter" value="#{car.cell4}" >
+                                <p:column  >
+                                    <h:outputText value="#{type_ter.name}" escape="false"/>
+                                </p:column>
+                            </p:subTable>
+                        </table>
+                    </p:column>
+
+
+
+                    <p:column>
+                        <table>
+                            <p:subTable var="type_ter" value="#{car.cell4}" >
+                                <p:column  >
+                                    <p:outputLabel value="#{type_ter.summ_plan}" >
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </p:outputLabel>
+                                </p:column>
+                            </p:subTable>
+                        </table>
+                    </p:column>
+
+
+                    <p:column>
+                        <table>
+                            <p:subTable var="type_ter" value="#{car.cell4}"  >
+                                <p:column  >
+                                    <p:outputLabel value="#{type_ter.summ_fact}" >
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </p:outputLabel>
+                                </p:column>
+                            </p:subTable>
+                        </table>
+                    </p:column>
+
+                    <p:column>
+                        <table>
+                            <p:subTable var="type_ter" value="#{car.cell4}" >
+                                <p:column  >
+                                    <p:outputLabel value="#{type_ter.summ_ek}" >
+                                        <f:convertNumber maxFractionDigits="3"/>
+                                    </p:outputLabel>
+                                </p:column>
+                            </p:subTable>
+                        </table>
+                    </p:column>
+
+
+
+                    <p:column>
+                        <p:outputLabel value="#{car.factS}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{car.factSM}" >
+                            <f:convertNumber maxFractionDigits="3"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{car.factO}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{car.factO2}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{car.factY0}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{car.factY2}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </p:outputLabel>
+                    </p:column>
+
+
+                </p:dataTable>
+
+
+
+                <h:commandLink>  
+                    <p:graphicImage library="img" name="excel.png"  />                   
+                    <p:dataExporter type="xls" target="report" fileName="cars" postProcessor="#{formTreePageBean1New.Print}" />  
+                </h:commandLink>        
+                <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+
+
+
+                    <h:button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button" value="Назад" outcome="mainpage" />
+
+
+                </p:panelGrid>     
+            </p:panelGrid>  
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

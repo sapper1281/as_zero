@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+        <div class="normalMainForm1">
+
+
+
+
+            <p:layout style=" height: 650px; ">
+
+
+
+                <p:layoutUnit position="west"  header="Структура" collapsible="true"  >
+
+                    <h:form id="form1">  
+                        <p:panelGrid columns="1" styleClass="invisibleBorder1"  style="text-align: left" >
+                            <p:growl id="messages" showDetail="true" /> 
+                            <p:tree value="#{departmentPageBean.root}" var="node" dynamic="true" cache="false"  
+                                    selectionMode="single"  selection="#{departmentPageBean.selectedNode}" id="tree">  
+
+                                <p:ajax event="expand" update=":form1:messages " listener="#{departmentPageBean.onNodeExpand}" />  
+                                <p:ajax event="collapse" update=":form1:messages" listener="#{departmentPageBean.onNodeCollapse}" />  
+                                <p:ajax event="select" update=":form1:messages,:form1:tree,:form2:tabView" listener="#{departmentPageBean.onNodeSelect}" />  
+                                <p:ajax event="unselect" update=":form1:messages" listener="#{departmentPageBean.onNodeUnselect}" />  
+
+                                <p:treeNode>  
+                                    <h:outputText value="#{node}" />  
+                                </p:treeNode>  
+                            </p:tree> 
+                        </p:panelGrid> 
+                    </h:form>  
+
+                </p:layoutUnit>        
+
+                <p:layoutUnit position="center">     
+                    <h:form id="form2">
+
+                        <p:panelGrid columns="1" styleClass="invisibleBorder1"  style="text-align: left">
+
+                            <p:tabView id="tabView" dynamic="true"  >  
+
+                                <p:tab id="playerTab1" title="Добавить Предприятие"  >  
+
+                                    <p:panel rendered="#{departmentPageBean.deparSelect}">  
+                                        <f:facet  name="footer">
+                                            <p:panelGrid columns="2"  >
+                                                <p:commandLink update=":form1:tree,:form2:tabView"  actionListener="#{departmentPageBean.save}" value="#{msgs.saveDepartment}"/>
+                                            </p:panelGrid>
+
+                                        </f:facet>
+                                        <h3>#{departmentPageBean.depar}</h3>
+                                        <p:panelGrid columns="2"  >
+
+                                            <h:outputLabel for="inputTextDep" value="#{msgs.inputDepartment}" />  
+                                            <p:inputText id="inputTextDep" value="#{departmentPageBean.inputDep.nameNp}"/>
+
+
+                                            <h:outputLabel for="inputCal" value="#{msgs.dateDepartment}" />  
+                                            <p:calendar value="#{departmentPageBean.inputDep.dtBeginNSI}" id="inputCal" navigator="true" showOn="button" pattern="dd.MM.yyyy" locale="ru"  />  
+
+
+
+
+
+                                        </p:panelGrid>
+                                    </p:panel>
+                                </p:tab> 
+
+                                <p:tab id="playerTab2" title="Редактировать Предприятие"   >  
+
+                                    <p:panel rendered="#{departmentPageBean.deparSelect}">  
+                                        <f:facet  name="footer">
+                                            <p:panelGrid columns="2"  >
+                                                <p:commandLink update=":form1:tree,:form2:tabView"  actionListener="#{departmentPageBean.save1}" value="#{msgs.saveDepartment}"/>
+                                                <p:commandLink update=":form1:tree,:form2:tabView"  actionListener="#{departmentPageBean.del}" value="#{msgs.delDepartment}"/>
+                                            </p:panelGrid>
+
+                                        </f:facet>
+                                        <h3>#{departmentPageBean.depar}</h3>
+                                        <p:panelGrid columns="2"  >
+
+                                            <h:outputLabel for="inputTextDep2" value="#{msgs.inputDepartment}" />  
+                                            <p:inputText id="inputTextDep2" value="#{departmentPageBean.depar.nameNp}"/>
+
+                                             
+
+
+                                            <h:outputLabel for="inputCal2" value="#{msgs.dateDepartment}" />  
+                                            <p:calendar value="#{departmentPageBean.depar.dtBeginNSI}" id="inputCal2" navigator="true" showOn="button" pattern="dd.MM.yyyy" locale="ru"  />  
+
+                                            <h:outputLabel for="inputCal3" value="#{msgs.dateDepartment1}" />  
+                                            <p:calendar value="#{departmentPageBean.depar.dt_end}" id="inputCal3" navigator="true" showOn="button" pattern="dd.MM.yyyy" locale="ru"  />  
+
+ 
+
+                                        </p:panelGrid>
+                                    </p:panel>
+
+
+                                </p:tab>  
+                                <p:tab id="playerTab3" title="Пользователи"   >  
+
+                                    <p:panel rendered="#{departmentPageBean.deparSelect}">  
+                                        <f:facet  name="footer">
+                                            <p:panelGrid columns="2"  >
+                                                <h:link id="submit"  value="Добавить" outcome="#{usersPageBean.editItem()}">
+                                                    <f:param name="id" value="0" />
+                                                    <f:param name="dep" value="#{departmentPageBean.depar.id}" />
+                                                </h:link>
+                                                <h:link id="exit"  value="Назад" outcome="mainpage"/> 
+                                            </p:panelGrid>
+
+                                        </f:facet>
+                                        <h3>#{departmentPageBean.depar}</h3>
+                                        <p:dataTable id="dataTable" var="item" value="#{usersPageBean.beanList}" widgetVar="carsTable"   
+                                                     emptyMessage="Нет пользователей удовлетворяющих условию" filteredValue="#{usersPageBean.filteredBeanList}">   
+
+                                            <p:column id="log" headerText="Логин" filterBy="#{item.login}" filterMatchMode="startsWith" sortBy="#{item.login}">  
+                                                <h:outputText value="#{item.login}" />  
+                                            </p:column>  
+
+                                            <p:column id="fio" headerText="ФИО" filterBy="#{item.FIO}" filterMatchMode="contains" sortBy="#{item.FIO}">  
+                                                <h:outputText value="#{item.FIO}" />  
+                                            </p:column> 
+
+                                            <p:column id="phone" headerText="Телефон" filterBy="#{item.phoneNumber}" filterMatchMode="contains" sortBy="#{item.phoneNumber}">  
+                                                <h:outputText value="#{item.phoneNumber}" />  
+                                            </p:column> 
+                                            
+                                            <p:column id="flag">  
+                                                 <h:outputText value="Удален" rendered="#{item.deleted}"/>  
+                                            </p:column> 
+
+                                            <p:column headerText="">  
+                                                <div class="centralizationDiv">
+                                                    <h:link  value="Редактировать" outcome="#{usersPageBean.editItem()}">
+                                                        <f:param name="id" value="#{item.id}" />
+                                                        <f:param name="dep" value="#{departmentPageBean.depar.id}" />
+                                                    </h:link>
+                                                </div>
+                                            </p:column> 
+
+                                        </p:dataTable>
+                                    </p:panel>
+
+
+                                </p:tab> 
+
+                            </p:tabView>
+
+                        </p:panelGrid> 
+
+                    </h:form>
+                </p:layoutUnit>
+            </p:layout>
+        </div>
+    </ui:define>
+
+
+</ui:composition>
+
+

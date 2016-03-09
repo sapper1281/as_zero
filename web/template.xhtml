@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+            <meta http-equiv="Cache-Control" content="no-cache" />
+            <meta http-equiv="Pragma" content="no-cache" />
+            <title>#{msgs.title}</title>
+
+
+
+        </f:facet>
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/Main.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            PrimeFaces.locales ['ru'] = {
+                closeText: 'Закрыть',
+                prevText: 'Назад',
+                nextText: 'Вперёд',
+                monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+                dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Субота'],
+                dayNamesShort: ['Воск', 'Пон', 'Вт', 'Ср', 'Четв', 'Пят', 'Суб'],
+                dayNamesMin: ['В', 'П', 'Вт', 'С ', 'Ч', 'П ', 'Сб'],
+                weekHeader: 'Неделя',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Время',
+                timeText: 'Время',
+                hourText: 'Час',
+                minuteText: 'Минута',
+                secondText: 'Секунда',
+                currentText: 'Сегодня',
+                ampm: false,
+                month: 'Месяц',
+                week: 'неделя',
+                day: 'День',
+                allDayText: 'Весь день'
+            };
+        </script>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <div id="topMain">
+                <table>
+                    <tr>
+                        <td class="logoCell">
+                            <p:graphicImage library="img" name="rzd.png"  styleClass="logo"/>
+                        </td>
+                        <td>
+                            <p class="redHeader">
+                                <p:outputLabel value="#{msgs.header}" escape="false"/>
+                            </p>
+                        </td>
+                        <td class="logoCell">
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div ID="topRZD" class="center">
+                <p style="margin: 0px;">
+                    <p:outputLabel value="#{msgs.rzd}" escape="false" styleClass="whiteHeader"/>
+                    <p:commandLink value="Выход" rendered="#{autorizationBean.user!=null}" actionListener="#{autorizationBean.logOut()}"  style=" float: right; margin: 4px; font-size: 14px"/>
+                </p>           
+            </div>
+            <h:form>
+                <p:idleMonitor timeout="1500000" onidle="document.location.replace('errorpagetimeout.xhtml');"/>
+            </h:form>
+        </div>
+
+
+        <div>
+            <ui:insert name="left"></ui:insert>
+            <div id="content" class="left_content, center">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+
+
+    </h:body>
+
+</html>

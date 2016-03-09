@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="form" rendered="#{formBean.session!=null &amp;&amp; formBean.session.user!=null}">
+            <p:panelGrid columns="1" styleClass="invisibleBorder">
+                <p:outputLabel value="#{formone.form}" styleClass="formNumber"/>
+
+                <p:outputLabel value="#{formone.header}" styleClass="report"/>
+
+                <p:panelGrid columns="2" styleClass="invisible" columnClasses="leftHeaderColumn, rightColumn">
+                    <p:outputLabel value="#{formone.department}" styleClass="reportHeader"/>
+                    <p:outputLabel value="#{formOnePageBean.rep.usr.department.nameNp}"/>
+                </p:panelGrid>
+
+                <p:outputLabel value="#{formone.time}" styleClass="reportHeader"/>
+
+                <p:panelGrid columns="5" styleClass="invisible">
+                    <p:outputLabel value="#{formone.timeFrom}"/> 
+                    <h:panelGrid id="panel1" columns="2" class="withoutBorder" rowClasses="withoutBorder" columnClasses="withoutBorder, withoutBorder"> 
+
+                        <p:calendar  disabled="#{(formOnePageBean.bloc_rec_fact||formOnePageBean.t_dep_form)&amp;&amp;!formOnePageBean.rep.solveInputPlan}" value="#{formOnePageBean.rep.time_begin}" id="popupButton2Cal" showOn="button" locale="ru" navigator="true" pattern="HH:00" timeOnly="true">
+                            <p:ajax event="dateSelect" listener="#{formOnePageBean.addDate}" update="report"  />  
+                        </p:calendar>
+
+                        <p:dialog header="Selected Dates" widgetVar="dialog" 
+                                  showEffect="fade" hideEffect="fade">
+                            <h:outputText value="#{formOnePageBean.rep.time_begin}" id="popupButton2Date">
+                                <f:convertDateTime pattern="hh:00"/>
+                            </h:outputText>
+                        </p:dialog>
+                    </h:panelGrid>
+
+                    <p:outputLabel value="#{formone.timeTo}"/>
+                    <h:panelGrid id="panel2" columns="2" class="withoutBorder" rowClasses="withoutBorder" columnClasses="withoutBorder, withoutBorder"> 
+                        <p:calendar  disabled="#{(formOnePageBean.bloc_rec_fact||formOnePageBean.t_dep_form)&amp;&amp;!formOnePageBean.rep.solveInputPlan}" value="#{formOnePageBean.rep.time_finish}" id="popupButton1Cal" showOn="button" locale="ru" navigator="true" pattern="HH:00" timeOnly="true">
+                            <p:ajax event="dateSelect" listener="#{formOnePageBean.addDate}" update="report"  />  
+                        </p:calendar>
+                        <p:dialog header="Selected Dates" widgetVar="dialog" 
+                                  showEffect="fade" hideEffect="fade">
+                            <h:outputText value="#{formOnePageBean.rep.time_finish}" id="popupButton1Date">
+                                <f:convertDateTime pattern="hh:00"/>
+                            </h:outputText>
+                        </p:dialog>
+                    </h:panelGrid>
+
+                    <h:panelGrid id="panel3" columns="2" class="withoutBorder" rowClasses="withoutBorder" columnClasses="withoutBorder, withoutBorder"> 
+                        <p:calendar disabled="#{(formOnePageBean.bloc_rec_fact||formOnePageBean.t_dep_form)&amp;&amp;!formOnePageBean.rep.solveInputPlan}" mindate="#{formOnePageBean.dt_min_cal_st}" maxdate="#{formOnePageBean.dt_max_cal_st}" value="#{formOnePageBean.rep.dt_begin}" id="popupButton3Cal" showOn="button" locale="ru" navigator="true" pattern="dd.MM.yyyy">  
+                            <p:ajax event="dateSelect" listener="#{formOnePageBean.addDate}" update="report"  />  
+                        </p:calendar>
+
+                        <p:dialog header="Selected Dates" widgetVar="dialog" 
+                                  showEffect="fade" hideEffect="fade">
+                            <h:outputText value="#{formOnePageBean.rep.dt_begin}" id="popupButton3Date">
+                                <f:convertDateTime pattern="dd.MM.yyyy"/>
+                            </h:outputText>
+                        </p:dialog>
+                    </h:panelGrid>
+                </p:panelGrid>
+            </p:panelGrid>
+
+            <p:growl id="messages" showDetail="true"/>
+
+
+            <p:contextMenu for="report" rendered="#{!formOnePageBean.bloc_rec_fact&amp;&amp;!formOnePageBean.t_dep_form}" >  
+                <p:menuitem value="Delete" update=":form:report"  icon="ui-icon-close" actionListener="#{formOnePageBean.deleteReportDetails}"/>
+            </p:contextMenu>  
+
+
+            <p:dataTable  var="car" value="#{formOnePageBean.rep.details}"  rowKey="#{car.id}"
+                          selection="#{formOnePageBean.selectedDetails}"
+                          selectionMode="single"
+                          id="report" styleClass="cont" 
+                          editable="true" emptyMessage="Нет мероприятий"
+                          >
+
+
+                <p:ajax event="rowEdit" listener="#{formOnePageBean.onEdit}" update=":form:messages, report" />
+                <p:ajax event="rowEditCancel" listener="#{formOnePageBean.onCancel}" update=":form:messages" />
+
+                <p:columnGroup  type="header">  
+                    <p:row>  
+                        <p:column rowspan="2" colspan="1" headerText="#{formone.one}"/>  
+                        <p:column rowspan="2" colspan="1" headerText="#{formone.two}"/>  
+                        <p:column rowspan="1" colspan="3" headerText="#{formone.three}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="3" headerText="#{formone.four}"/>  
+                        <p:column rowspan="2" colspan="1" headerText=""/>  
+                    </p:row> 
+                    <p:row>  
+                        <p:column rowspan="1" colspan="1" headerText="#{formone.two_1}"/>  
+                        <p:column rowspan="1" colspan="1" headerText="#{formone.two_2}"/>  
+                        <p:column rowspan="1" colspan="1" headerText="#{formone.two_3}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="1" headerText="#{formone.two_1}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="1" headerText="#{formone.two_2}"/>  
+                        <p:column rendered="#{formOnePageBean.t_fact_form}" rowspan="1" colspan="1" headerText="#{formone.two_3}"/>  
+                    </p:row> 
+                </p:columnGroup>  
+
+
+                <p:column >
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.resource.string}" escape="false"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu value="#{car.resource}"  converter="resourceConverter" style="width: 180px" disabled="#{(formOnePageBean.bloc_rec_fact&amp;&amp;car.id!=0)  &amp;&amp;!formOnePageBean.rep.solveInputPlan}">
+                                <f:selectItems value="#{formOnePageBean.list}"
+                                               var="man" 
+                                               itemLabel="#{man.string}"
+                                               itemValue="#{man}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.activity}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.activity}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.plan_col}">
+                                <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel> />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.plan_col}" disabled="#{(formOnePageBean.bloc_rec_fact&amp;&amp;car.id!=0)  &amp;&amp;!formOnePageBean.rep.solveInputPlan}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.plan_tut}">
+                                 <f:convertNumber maxFractionDigits="2"/>
+                            </p:outputLabel> />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.plan_tut}" disabled="true"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.plan_money}">
+                                 <f:convertNumber maxFractionDigits="3"/>
+                            </p:outputLabel>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.plan_money}" disabled="#{(formOnePageBean.bloc_rec_fact&amp;&amp;car.id!=0)  &amp;&amp;!formOnePageBean.rep.solveInputPlan}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column rendered="#{formOnePageBean.t_fact_form}">
+                    <p:cellEditor  rendered="true">
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.fact_col}" rendered="#{car.dt_inputFact_test}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.fact_col}" disabled="#{car.resource.name.equalsIgnoreCase('Электроэнергия')}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column rendered="#{formOnePageBean.t_fact_form}">
+                    <p:cellEditor  rendered="true">
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.fact_tut}" rendered="#{car.dt_inputFact_test}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.fact_tut}" disabled="true"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column rendered="#{formOnePageBean.t_fact_form}">
+                    <p:cellEditor  rendered="true">
+                        <f:facet name="output">
+                            <p:outputLabel value="#{car.fact_money}" rendered="#{car.dt_inputFact_test}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{car.fact_money}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column>
+                    <p:rowEditor />
+                </p:column>
+
+                <f:facet name="footer">
+                    <h:commandButton rendered="#{(!formOnePageBean.t_dep_form)&amp;&amp;(formOnePageBean.bloc_out_time_input_all||formOnePageBean.rep.solveInputPlan)}" value="#{formone.newLine}" action="#{formOnePageBean.addRow}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
+                </f:facet>
+            </p:dataTable>
+            <h:commandLink>  
+                <p:graphicImage library="img" name="excel.png"  />                   
+                <p:dataExporter type="xls" target="report" fileName="formone" postProcessor="#{formOnePageBean.Print}" />  
+            </h:commandLink> 
+
+        </h:form>
+
+        <p:panelGrid columns="2" styleClass="invisibleBorder" columnClasses="leftHeaderColumn, rightColumn">
+
+            <p:outputLabel value="#{formone.dt_create}"/>
+            <p:outputLabel value="#{formOnePageBean.rep.dt_createString}"/>
+            <p:outputLabel value="#{formone.user}"/>
+            <p:outputLabel value="#{formOnePageBean.rep.usr.FIO}"/>
+            <p:outputLabel value="#{formone.phone}"/>
+            <p:outputLabel value="#{formOnePageBean.rep.usr.phoneNumber}"/>
+           
+
+            <p:outputLabel value="#{formone.redact_alow}" styleClass="boldText" rendered="#{formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID}"/>  
+            <h:form rendered="#{formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID}">  
+                <p:selectBooleanCheckbox value="#{formOnePageBean.rep.solveInputPlan}" rendered="#{formOnePageBean.rep.department.idVp==formOnePageBean.session.user.departmentID}">  
+                    <p:ajax listener="#{formOnePageBean.addMessage}"/>  
+                </p:selectBooleanCheckbox> 
+            </h:form>
+
+            <h:form class="left">
+               
+                <h:commandButton  rendered="#{(!formOnePageBean.t_dep_form)&amp;&amp;(formOnePageBean.bloc_out_time_input_all||formOnePageBean.rep.solveInputPlan)}" value="#{formone.save}" action="#{formOnePageBean.save}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
+              <h:commandButton rendered="#{(!formOnePageBean.bloc_rec_fact)&amp;&amp;formOnePageBean.redactor&amp;&amp;!formOnePageBean.t_dep_form}" action="mainpage"  actionListener="#{formOnePageBean.deleteReport(formOnePageBean.rep)}" value="#{formone.del}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
+                  
+                
+                <h:button value="#{formone.back}" outcome="mainpage" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
+            </h:form>
+        </p:panelGrid>
+
+    </ui:define>
+</ui:composition>
